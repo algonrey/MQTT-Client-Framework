@@ -868,6 +868,12 @@ typedef void (^MQTTPublishHandler)(NSError *error);
  @endcode
  
  */
+
+
+/// Removes a pending message form the queue
+/// @param msgId The message id.
+- (void) removeMessageFromQueue:(UInt16) msgId;
+
 - (void)closeWithDisconnectHandler:(MQTTDisconnectHandler)disconnectHandler;
 
 /** close V5

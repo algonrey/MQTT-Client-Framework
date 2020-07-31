@@ -478,6 +478,21 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
     return msgId;
 }
 
+- (void)removeMessageFromQueue:(UInt16)msgId{
+    
+    NSArray<MQTTFlow *> *flows = [self.persistence allFlowsforClientId:self.clientId
+                                                          incomingFlag:NO];
+    for (MQTTFlow *flow in flows) {
+        
+        if (flow.messageId.intValue == msgId) {
+            [self.persistence deleteFlow:flow];
+            return;
+        }
+        
+    }
+    
+}
+
 - (void)closeWithDisconnectHandler:(MQTTDisconnectHandler)disconnectHandler {
     [self closeWithReturnCode:MQTTSuccess
         sessionExpiryInterval:nil
